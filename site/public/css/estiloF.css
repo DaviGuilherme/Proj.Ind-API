@@ -1,0 +1,235 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+}
+
+/* Cabeçalho */
+
+.navBar {
+    padding: 20px;
+    color: #f7e7e9;
+    background: linear-gradient(45deg, #392852, #7655a8 );
+    border-bottom: 3px solid #412b63;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.itens {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 50px;
+}
+
+
+
+
+a {
+    display: flex;
+    justify-content: space-between;
+    color: #eee;
+    font-size: 15px;
+    text-decoration: none;
+}
+a:hover {
+    transition: 0.5s;
+    background-color: #412b63;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+/* Área de acesso */
+
+.bg-video {
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 50%;
+    z-index: -50;
+    background: url(../img/montagem-faustao.png) 
+    no-repeat center;
+    background-size: cover;
+    margin: right 500px; ;
+}
+
+.area {
+    margin: 60px;
+}
+
+
+.acesso {
+    /* background-image: url(../img/montagem-faustao.png); */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 50vh;
+    height: 400px;
+    padding: 40px;
+}
+
+.tela {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0%, 0%, 0%, 50%);
+    position: absolute;
+    bottom: 0%;
+    width: 619px;
+    height: 619px;
+    z-index: -50;
+    border-radius: 3px;
+    border: 2px solid #5b3d89;
+    
+}
+
+#bem-vindo {
+    font-size: 30px;
+    margin: 30px;
+}
+
+.login {
+    color: beige;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    /* margin: 30px; */
+}
+
+p {
+    font-size: 12px;
+}
+
+h2 {
+    font-weight: 800;
+}
+
+.ipt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 15px;
+    background-color: #eee;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 20px;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 12px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: #eee;
+    background-image: linear-gradient(45deg, #705994, #7655a8 );
+    transition: 0.5s;
+}
+
+
+/* Footer */
+
+footer {
+    border-top: 3px solid #412b63;
+    color: #fc776b;
+    background-image: linear-gradient(45deg, #392852, #7655a8 );
+    text-align: center;
+    padding: 40px;
+    
+    
+}
+
+.bold {
+    color: #fc4d3e;
+    font-weight: bold;
+}
+
+/* Daqui */ 
+
+.alerta_erro{
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .card_erro {
+    display: none;
+    background-color: #fff;
+    color: black;
+    width: 230px;
+    position: fixed;
+    border-radius: 4px;
+    border: #e6005a 3px solid;
+    padding: 10px;
+    margin-right: 10%;
+  }
+  
+  .card_erro #mensagem_erro{
+    font-weight: 500;
+    font-size: 20px;
+  }
+  
+  .formulario .tipo_campo {
+    font-size: 20px;
+    font-weight: 600 !important;
+  }
+  
+  .formulario {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input {
+    margin-bottom: 10px;
+    border: 2px solid #32b9cd;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .btn {
+    font-family: "Barlow", sans-serif;
+    border: 0;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #e6005a;
+    width: 120px;
+    align-self: center;
+    margin-top: 5px;
+  }
+  
+  .loading-div {
+    width: 50px;
+    margin: auto;
+    display: none;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+  }
+

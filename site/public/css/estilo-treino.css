@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.tudo {
+    display: flex;
+}
+
+.menu {
+    background-color: rgb(19, 18, 18);
+    width: 30%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid rgb(180, 180, 180);
+}
+
+
+
+.box-treino {
+    height: 50px;
+    width: 300px;
+    background-color: rgb(255, 0, 157);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    transition: 0.5s;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 30px;
+    font-weight: bold;
+    color: beige;
+}
+.box-treino:hover {
+    background-image: url(/site/public/assets/imgs/churrasqueira-600x400.jpg);
+    background-size:cover;
+    height: 120%;
+    color: rgba(0, 0, 0, 0)
+}
+
+.box-treino2 {
+    height: 50px;
+    width: 300px;
+    background-color: rgb(0, 255, 128);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    transition: 0.5s;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 30px;
+    font-weight: bold;
+    color: beige;
+}
+.box-treino2:hover {
+    background-image: url(../assets/imgs/sevira.jpg);
+    background-size:cover;
+    height: 100%;
+    color: rgba(0, 0, 0, 0)
+}
+
+
+.box-treino3 {
+    height: 50px;
+    width: 300px;
+    background-color: rgb(179, 255, 0);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    transition: 0.5s;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 30px;
+    font-weight: bold;
+    color: beige;
+}
+.box-treino3:hover {
+    background-image: url(../assets/imgs/selena.jpg);
+    background-size:cover;
+    height: 29%;
+    color: rgba(0, 0, 0, 0)
+}
+
+
+.box-treino4 {
+    height: 50px;
+    width: 300px;
+    background-color: rgb(119, 0, 255);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    transition: 0.5s;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin: 30px;
+    font-weight: bold;
+    color: beige;
+}
+.box-treino4:hover {
+    background-image: url(../assets/imgs/faustinho.jpg);
+    background-size:cover;
+    height: 50%;
+    color: rgba(0, 0, 0, 0)
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    transition: 0.5s;
+    color: #eee;
+    font-weight: bold;
+}
+
+/* Lista */
+
+.lista {
+    height: 100%;
+    width: 1000px;
+    background-color: rgb(124, 115, 115);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 500px;
+    background-color: rgb(235, 219, 219);
+    border: 1px solid rgb(29, 27, 27) ;
+}

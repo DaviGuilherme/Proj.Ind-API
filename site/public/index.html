@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faustão Training Maker</title>
+    <link rel="stylesheet" href="css/estiloF.css">
+    <link rel="stylesheet" href="img/montagem-faustao.png">
+    <link rel="stylesheet" href="cadastro.html">
+    <link rel="shortcut icon" href="/site/public/assets/icon/icone.png" type="image/x-icon">
+    <script src="./js/funcoes.js"></script>
+</head>
+
+<body>
+    <main>
+        <!--Cabeçalho-->
+        <div class="navBar">
+            <div class="logo">
+                <h1>Faustão Training Maker</h1>
+            </div>
+            <span class="itens">
+                <a href="./sobre.html">Sobre</a>
+                <a href="./maker.html">IMC</a>
+            </span>
+
+        </div class="navBar">
+        <!--Área do acesso-->
+        <section class="area">
+
+            <video autoplay loop muted poster="/site/public/assets/imgs/montagem-faustao.png" class="bg-video">
+                <source src="/site/public/assets/imgs/videoFausto.mp4" type="video/mp4">
+            </video>
+
+            <div class="acesso">
+                <div class="login">
+                    <!-- <p id="bem-vindo">Faustão Treino Maker</p> -->
+                    <h2>Login</h2>
+                    <br><br>
+                    <input type="text" class="ipt" placeholder="email" id="email_input">
+                    <br><br>
+                    <input type="password" class="ipt" placeholder="Senha" id="senha_input">
+                    <br><br>
+                    <button class="btn" onclick="entrar()">Entrar</button>
+                    <br>
+                    <a href="cadastro.html">Criar Conta</a>
+                </div>
+                <div class="tela">
+                </div>
+                <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
+                
+            </div>
+            <div id="div_aguardar" class="loading-div">
+                <img src="./assets/circle-loading.gif" id="loading-gif">
+            </div>
+
+            <div id="div_erros_login">
+
+            </div>
+
+        </section>
+        <!--footer-->
+        <footer>
+            <div class="footer">
+                Feito por <span class="bold">Davi Guilherme</span> 1-CCO
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
+<script>
+     function entrar() {
+        aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/treino.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+</script>
