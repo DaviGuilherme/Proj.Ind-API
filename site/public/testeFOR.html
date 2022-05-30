@@ -7,24 +7,27 @@
     <title>teste</title>
 </head>
 <body>
-    Quantos dias voce faz musculação ? <br>
-    <input type="text" id="ipt_dias"> <br>
-    <button onclick="exibir()">Exibir intervalo de treino</button> <br>
-    <div id="div_msg"></div>
+        Quantos <b>dias</b> voce quer praticar musculação ? <br>
+        <input type="text" id="ipt_intervalo"> <br>
+        De quantos em quantos dias o você quer fazer musculação ? <br>
+        <input type="text" id="ipt_dias"> <br>
+        <button onclick="exibir()">Exibir intervalo de treino</button> <br>
+        <div id="div_msg"></div>
 </body>
 </html>
 <script>
     function exibir() {
         var dias = Number(ipt_dias.value);
+        var intervalo = Number(ipt_intervalo.value);
 
         div_msg.innerHTML = ``;
-        for (var contador = 0; contador <= 29; contador++) {
+        for (var contador = 0; contador <= intervalo - 1; contador++) {
 
             if (contador % dias !== 0) {
-            div_msg.innerHTML += `Dia ${contador + 1}: Livre<br>`;
+            div_msg.innerHTML += `Dia ${contador + 1} - Livre<br>`;
                 
             } else if (contador % dias == 0){
-                div_msg.innerHTML += `Dia ${contador + 1}: Musculação<br>`;
+                div_msg.innerHTML += `Dia ${contador + 1} - Musculação<br>`;
             }
         }
 
