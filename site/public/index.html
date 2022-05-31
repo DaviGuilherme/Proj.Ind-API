@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="cadastro.html">
     <link rel="shortcut icon" href="/site/public/assets/icon/icone.png" type="image/x-icon">
     <script src="./js/funcoes.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -28,14 +29,18 @@
         </div class="navBar">
         <!--Área do acesso-->
         <section class="area">
+            <audio src="">
 
+            </audio>
             <video autoplay loop muted poster="/site/public/assets/imgs/montagem-faustao.png" class="bg-video">
                 <source src="/site/public/assets/imgs/videoFausto.mp4" type="video/mp4">
             </video>
 
+
+
             <div class="acesso">
                 <div class="login">
-                    <!-- <p id="bem-vindo">Faustão Treino Maker</p> -->
+
                     <h2>Login</h2>
                     <br><br>
                     <input type="text" class="ipt" placeholder="email" id="email_input">
@@ -54,9 +59,9 @@
                     </div>
                 </div>
                 
-            </div>
-            <div id="div_aguardar" class="loading-div">
-                <img src="./assets/circle-loading.gif" id="loading-gif">
+                <!-- <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div> -->
             </div>
 
             <div id="div_erros_login">
@@ -72,17 +77,23 @@
         </footer>
     </main>
 </body>
+
 </html>
 <script>
-     function entrar() {
-        aguardar();
+    function entrar() {
+        // aguardar();
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            // cardErro.style.display = "block"
+            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Parece que você não prencheu todos os campos'
+            })
             finalizarAguardar();
             return false;
         }

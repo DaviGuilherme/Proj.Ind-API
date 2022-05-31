@@ -21,3 +21,27 @@ h1 {
     padding: 80px;
     border-radius: 5px;
 }
+
+a {
+    color: rgb(49, 47, 47);
+    background-color: #eee;
+    width: 150px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border: black 2px solid;
+  }
+  
+  
+  a:hover {
+    color: black;
+    background-color: #a692c5;
+    transition: 0.5s;
+    color: #eee;
+    font-weight: bold;
+  }

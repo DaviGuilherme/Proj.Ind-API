@@ -1,3 +1,7 @@
+body {
+    background-image: url(/site/public/assets/imgs/montagem-faustao.png);
+}
+
 * {
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
@@ -53,10 +57,10 @@ a:hover {
     bottom: 0%;
     min-width: 100%;
     min-height: 100%;
-    width: 100%;
+    width: 50%;
     height: 50%;
     z-index: -50;
-    background: url(../img/montagem-faustao.png) 
+    background-image: url(../img/montagem-faustao.png) 
     no-repeat center;
     background-size: cover;
     margin: right 500px; ;
@@ -68,13 +72,14 @@ a:hover {
 
 
 .acesso {
-    /* background-image: url(../img/montagem-faustao.png); */
+    background-image: url(../img/montagem-faustao.png);
     display: flex;
     flex-direction: row;
     justify-content: center;
     min-height: 50vh;
     height: 400px;
     padding: 40px;
+    z-index: -100;
 }
 
 .tela {
@@ -200,15 +205,15 @@ footer {
     flex-direction: column;
   }
   
-  input {
+  /* input {
     margin-bottom: 10px;
     border: 2px solid #32b9cd;
     padding: 10px;
     text-align: center;
     border-radius: 10px;
-  }
+  } */
   
-  .btn {
+  /* .btn {
     font-family: "Barlow", sans-serif;
     border: 0;
     border-radius: 5px;
@@ -220,7 +225,7 @@ footer {
     width: 120px;
     align-self: center;
     margin-top: 5px;
-  }
+  } */
   
   .loading-div {
     width: 50px;

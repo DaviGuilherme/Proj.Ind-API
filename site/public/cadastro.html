@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,19 +12,22 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <!-- <script src="./js/funcoes.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/funcoes.js"></script>
 </head>
+
 <body>
     <div class="cadastro">
-        <h1>Cadastro</h1> 
+        <h1>Cadastro</h1>
         <input type="text" placeholder="Email" id="email_input">
         <br><br>
         <input type="text" placeholder="Senha" id="senha_input">
         <br><br>
-        <input type="text" placeholder="Confirme a senha" id="confirmacao_senha_input"> 
+        <input type="text" placeholder="Confirme a senha" id="confirmacao_senha_input">
         <br> <br>
         <button onclick="cadastrar()">Cadastrar</button>
+        <br>
+        <a href="./index.html" class="voltar">Voltar</a>
 
         <div class="alerta_erro">
             <div class="card_erro" id="cardErro">
@@ -39,6 +43,7 @@
 
     </div>
 </body>
+
 </html>
 <script>
     function cadastrar() {
@@ -51,9 +56,14 @@
         var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
         if (emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Mensagem de erro para todos os campos em branco";
-
+            // cardErro.style.display = "block"
+            // mensagem_erro.innerHTML = "Preencha todos os campos";
+            //  alert("Preencha todos os campos") ;
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Parece que voce não preencheu algum campo',
+            })
             finalizarAguardar();
             return false;
         }
@@ -78,14 +88,21 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
+                // cardErro.style.display = "block";
 
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                // mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                Swal.fire(
+                    'Cadastro realizado com sucesso!',
+                    'Redirecionando para tela de Login...',
+                    'success'
+                )
+
 
                 setTimeout(() => {
                     window.location = "index.html";
                 }, "2000")
-                
+
                 limparFormulario();
                 finalizarAguardar();
             } else {

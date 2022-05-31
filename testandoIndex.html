@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    valor: <br>
+    <input type="text" id="ipt_valor"> <br>
+    <button onclick="clicar()">clicar</button> <br>
+    ocorrencia: <br>
+    <input type="text" id="ipt_ocorrencia">
+    <button onclick="revelar()">revelar</button> <br>
+    <div id="msg"></div>
+</body>
+</html>
+<script>
+    var lista = [];
+    var valor = Number(ipt_valor.value);
+    function clicar() {
+
+        lista.push(Number(ipt_valor.value));
+        ipt_valor.value = ``;
+    }
+
+    function revelar() {
+        var valor_ocorrencia = Number(ipt_ocorrencia.value);
+
+        // lista.indexOf(lista[valor - 1]);
+
+        if (lista.indexOf(lista[valor_ocorrencia - 1]) == -1) {
+            msg.innerHTML = `A ocorrencia ${valor_ocorrencia} não existe`;
+        }
+        else if (lista.indexOf(lista[valor_ocorrencia - 1]) !== -1) {
+            msg.innerHTML = `A ocorrencia ${valor_ocorrencia} existe e possui o valor ${lista[valor_ocorrencia - 1]} `;
+        }
+
+    }
+</script>
