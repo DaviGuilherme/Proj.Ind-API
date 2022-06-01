@@ -87,14 +87,14 @@
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            // cardErro.style.display = "block"
+            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
 
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Oops...',
-            //     text: 'Parece que você não prencheu todos os campos'
-            // })
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Parece que você não prencheu todos os campos'
+            })
 
             finalizarAguardar();
             return false;

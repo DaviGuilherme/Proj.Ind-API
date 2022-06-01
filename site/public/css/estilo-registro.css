@@ -45,3 +45,26 @@ button:hover {
     color: #eee;
     font-weight: bold;
 }
+
+a {
+    color: rgb(49, 47, 47);
+    background-color: #eee;
+    width: 148px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #a692c5;
+    transition: 0.5s;
+    color: #eee;
+    font-weight: bold;
+    border: 2px solid black;
+}
