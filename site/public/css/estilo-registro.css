@@ -40,7 +40,7 @@ button {
 }
 
 button:hover {
-    background-color: #a692c5;
+    background-color: #412b63;
     transition: 0.5s;
     color: #eee;
     font-weight: bold;
@@ -62,9 +62,24 @@ a {
 }
 
 a:hover {
-    background-color: #a692c5;
+    background-color: #412b63;
     transition: 0.5s;
     color: #eee;
     font-weight: bold;
     border: 2px solid black;
 }
+
+/* a {
+    display: flex;
+    justify-content: space-between;
+    color: #eee;
+    font-size: 15px;
+    text-decoration: none;
+}
+a:hover {
+    transition: 0.5s;
+    background-color: #412b63;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+} */

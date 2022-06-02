@@ -38,7 +38,7 @@
     color: beige;
 }
 .box-treino:hover {
-    background-image: url(/site/public/assets/imgs/churrasqueira-600x400.jpg);
+    background-image: url(../assets/imgs/churrasqueira-600x400.jpg);
     background-size:cover;
     height: 120%;
     color: rgba(0, 0, 0, 0)

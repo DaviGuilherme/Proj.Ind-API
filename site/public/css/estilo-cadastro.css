@@ -37,7 +37,7 @@ button {
 }
 
 button:hover {
-    background-color: #a692c5;
+    background-color: #412b63;
     transition: 0.5s;
     color: #eee;
     font-weight: bold;
@@ -61,7 +61,7 @@ button:hover {
 
 
 .voltar:hover {
-  background-color: #a692c5;
+  background-color: #412b63;
   transition: 0.5s;
   color: #eee;
   font-weight: bold;
