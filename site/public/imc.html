@@ -43,7 +43,7 @@
     function calcularM() {
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
-        var calculo = (altura * altura) / peso;
+        var calculo = peso / (altura * altura);
         var vali = true;
 
         if (peso == '') {
@@ -55,17 +55,17 @@
             vali = false
         }
         if (vali) {
-            alert(`Seu Indice de Massa Corporea é ${calculo}`)
+            alert(`Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`)
         }
 
+    
 
         historicoIMC.push(calculo);
-        ipt_altura.value = ``;
     }
     function calcularF() {
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
-        var calculo = ((altura * altura) / peso) * 0.9;
+        var calculo = (peso / (altura * altura)) * 0.9;
         var vali = true;
 
         if (peso == '') {
@@ -77,9 +77,11 @@
             vali = false
         }
         if (vali) {
-            alert(`Seu Indice de Massa Corporea é ${calculo}`)
+            alert(`Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`)
             historicoIMC.push(altura);
         }
+
+        
 
     }
 
