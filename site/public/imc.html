@@ -39,7 +39,7 @@
 </html>
 <script>
     var historicoP = [];
-    var historicoA = [];
+    var historicoIMC = [];
     function calcularM() {
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
@@ -58,9 +58,8 @@
             alert(`Seu Indice de Massa Corporea é ${calculo}`)
         }
 
-        historicoP.push(peso);
-        ipt_peso.value = ``;
-        historicoA.push(altura);
+
+        historicoIMC.push(calculo);
         ipt_altura.value = ``;
     }
     function calcularF() {
@@ -79,12 +78,9 @@
         }
         if (vali) {
             alert(`Seu Indice de Massa Corporea é ${calculo}`)
+            historicoIMC.push(altura);
         }
 
-        historicoA.push(altura);
-        ipt_altura.value = ``;
-        historicoP.push(peso);
-        ipt_peso.value = ``;
     }
 
     
