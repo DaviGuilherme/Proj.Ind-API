@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idUsuario, limite_linhas) {
+function buscarUltimasMedidas(idUsuario) {
 
     instrucaoSql = ''
 
@@ -14,14 +14,18 @@ function buscarUltimasMedidas(idUsuario, limite_linhas) {
                     where fk_aquario = ${idUsuario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        momento,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
-                    from medida
-                    where fk_aquario = ${idUsuario}
-                    order by id desc limit ${limite_linhas}`;
+        instrucaoSql = 
+        `SELECT idRegistro as registro, peso as peso from registro
+        WHERE fkUsuario = ${idUsuario};`
+    
+        // `select 
+        // dht11_temperatura as temperatura, 
+        // dht11_umidade as umidade,
+        //                 momento,
+        //                 DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico
+        //             from medida
+        //             where fk_aquario = ${idUsuario}
+        //             order by id desc limit ${limite_linhas}`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -45,13 +49,19 @@ function buscarMedidasEmTempoReal(idUsuario) {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,
-                        DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idUsuario} 
-                    order by id desc limit 1`;
+        instrucaoSql =
+        // `select 
+        // dht11_temperatura as temperatura, 
+        // dht11_umidade as umidade,
+        //                 DATE_FORMAT(momento,'%H:%i:%s') as momento_grafico, 
+        //                 fk_aquario 
+        //                 from medida where fk_aquario = ${idUsuario} 
+        //             order by id desc limit 1`;
+
+        // `select peso from registro where fkUsuario = ${idUsuario} order by iDRegistro desc;`
+
+        `SELECT idRegistro as registro, peso as peso from registro
+        WHERE fkUsuario = ${idUsuario} `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

@@ -1,60 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="shortcut icon"
+      href="../assets/icon/icone.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="../css/estilo-registro.css" />
+    <script src="../js/funcoes.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Registro</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="shortcut icon" href="../assets/icon/icone.png" type="image/x-icon">
-  <link rel="stylesheet" href="../css/estilo-registro.css">
-  <script src="./js/funcoes.js"></script>
-
-  <title>Registro</title>
-</head>
-
-<body>
-  <section>
-    <div class="registro">
-      Quantos kilos voce perdeu desde o ultimo registro ? <br>
-      <input type="number" id="ipt_mes_passado"> <br><br>
-      <!-- <button onclick="registrar()" >Registrar</button> <br> <br> -->
-      <a href="./treino.html">voltar</a> <br> <br>
-      <div style="height: 400px; width: 400px;">
-        <canvas id="myChart"></canvas>
-      </div>
-      <div class="dash">
-        <div class="btns-dash">
+  <body>
+    <section class="tudo">
+      <div class="registro">
+        Quantos kilos voce perdeu desde o ultimo registro ? <br />
+        <input type="number" id="peso_input" /> <br /><br />
+        <div class="dash">
+          <div class="btns-dash">
             <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            <button class="btn-chart btn-pink" onclick="obterDadosGrafico(1)">Registrar</button>
-        </div>
-        <div>
+            <!-- <button class="btn-chart btn-pink" onclick="obterDadosGrafico(1)">
+              Exibir Grafico
+            </button> -->
+            <button onclick="registrar()">Registrar peso</button>
+            <a href="./treino.html">voltar</a> <br />
+            <br />
+          </div>
+          <div>
             <h3 class="tituloGraficos">
-                <span id="tituloAquario">123</span>
+              <span id="tituloAquario">123</span>
             </h3>
-        </div>
-        <div class="graph">
+          </div>
+          <div class="graph">
             <canvas id="canvas_grafico"></canvas>
+          </div>
         </div>
-    </div>
-    </div>
-  </section>
-</body>
-
+      </div>
+    </section>
+  </body>
 </html>
 <script>
+  var resgistros = 0;
+  function registrar() {
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var pesoVar = peso_input.value;
+    var uxVar = sessionStorage.ID_USUARIO;
+    if (pesoVar == "") {
+      // cardErro.style.display = "block"
+      // mensagem_erro.innerHTML = "Preencha todos os campos";
+      //  alert("Preencha todos os campos") ;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Parece que voce não digitou o peso",
+      });
+      return false;
+    } else {
+      alert("ok");
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/registrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        pesoServer: pesoVar,
+        uxServer: uxVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          atualizarDados();
+        } else {
+          throw "Houve um erro ao tentar realizar o registro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+
+  function atualizarDados() {
+    var uxVar = sessionStorage.ID_USUARIO;
+    fetch(`/medidas/ultimas/${uxVar}`, {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then((resposta) => {
+            var registros = []
+            var pesos = []
+            resposta.forEach(element => {
+                registros.push(element.registro)
+                pesos.push(element.peso)
+                console.log(element.peso)
+            });
+            plotarGrafico(registros, pesos)
+          });
+        } else {
+          throw "Houve um erro ao tentar realizar o registro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  // function sumirMensagem() {
+  //     cardErro.style.display = "none"
+  // }
+
+  // A partir daqui, são as funções do Gráfico
 
   let proximaAtualizacao;
 
   window.onload = obterDadosGrafico(1);
 
-  b_usuario.innerHTML = sessionStorage.ID_USUARIO;
-
-  verificar_autenticacao();
-
   function alterarTitulo(idUsuario) {
-      var tituloAquario = document.getElementById("tituloAquario")
-      tituloAquario.innerHTML = "Últimas registros de peso <span style='color: #e6005a'>Aquário " + idUsuario + "</span>"
+    var tituloAquario = document.getElementById("tituloAquario");
+    tituloAquario.innerHTML =
+      "Últimos registros de <span style='color: #fc4d3e'>Peso</span>";
   }
 
   // O gráfico é construído com três funções:
@@ -69,150 +154,133 @@
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
   function obterDadosGrafico(idUsuario) {
-      alterarTitulo(idUsuario)
+    alterarTitulo(idUsuario);
 
-      if (proximaAtualizacao != undefined) {
-          clearTimeout(proximaAtualizacao);
-      }
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
 
-      fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-          if (response.ok) {
-              response.json().then(function (resposta) {
-                  console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                  resposta.reverse();
+    fetch(`/medidas/ultimas/${idUsuario}`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
 
-                  plotarGrafico(resposta, idUsuario);
-              });
-          } else {
-              console.error('Nenhum dado encontrado ou erro na API');
-          }
-      })
-          .catch(function (error) {
-              console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            //plotarGrafico(resposta, idUsuario);
           });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
   }
 
   // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-  // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+  // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-  function plotarGrafico(resposta, idAquario) {
-      console.log('iniciando plotagem do gráfico...');
+  function plotarGrafico(registros, pesos) {
+    console.log("iniciando plotagem do gráfico...");
+      var labels = []
+      var registrosCerto = registros;
+      var pesosCerto = pesos;
+       
+        for(var i = 0; i<registrosCerto.length; i++){
+            labels.push("Registro " + (i+1))
+        }
+        var dados = {
+            labels: labels,
+            datasets: [
+                {
+                    yAxisID: 'y-peso',
+                    label: 'peso',
+                    borderColor: '#32B9CD',
+                    backgroundColor: '#32b9cd8f',
+                    fill: true,
+                    data: []
+                }
+            ]
+        };
 
-      var dados = {
-          labels: [],
-          datasets: [
-              {
-                  yAxisID: 'y-umidade',
-                  label: 'Umidade',
-                  borderColor: '#32B9CD',
-                  backgroundColor: '#32b9cd8f',
-                  fill: true,
-                  data: []
-              },
-              {
-                  yAxisID: 'y-temperatura',
-                  label: 'Temperatura',
-                  borderColor: '#FFF',
-                  backgroundColor: '#32b9cd8f',
-                  fill: true,
-                  data: []
-              }
-          ]
-      };
+      
 
-      for (i = 0; i < resposta.length; i++) {
-          var registro = resposta[i];
-          dados.labels.push(registro.momento_grafico);
-          dados.datasets[0].data.push(registro.umidade);
-          dados.datasets[1].data.push(registro.temperatura);
-      }
+        console.log(JSON.stringify(pesosCerto));
 
-      console.log(JSON.stringify(dados));
+        const data = {
+            labels: labels,
+            datasets: [{
+                    label: 'Peso',
+                    borderColor: '#fc4d3e',
+                    backgroundColor: '#705994',
+                    data: pesosCerto
+                }
+            ]
 
-      var ctx = canvas_grafico.getContext('2d');
-      window.grafico_linha = Chart.Line(ctx, {
-          data: dados,
-          options: {
-              responsive: true,
-              animation: { duration: 500 },
-              hoverMode: 'index',
-              stacked: false,
-              title: {
-                  display: false,
-                  text: 'Dados capturados'
-              },
-              scales: {
-                  yAxes: [{
-                      type: 'linear',
-                      display: true,
-                      position: 'left',
-                      id: 'y-temperatura',
-                      ticks: {
-                          beginAtZero: true,
-                          max: 100,
-                          min: 0
-                      }
-                  }, {
-                      type: 'linear',
-                      display: false,
-                      position: 'right',
-                      id: 'y-umidade',
-                      ticks: {
-                          beginAtZero: true,
-                          max: 100,
-                          min: 0
-                      },
 
-                      gridLines: {
-                          drawOnChartArea: false,
-                      },
-                  }],
-              }
-          }
-      });
 
-      setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+        const myChart = new Chart(document.getElementById('canvas_grafico'), config);
+
+       // setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
   }
 
-
   // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-  // buscando a última medida inserida em tabela contendo as capturas, 
+  // buscando a última medida inserida em tabela contendo as capturas,
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
-  function atualizarGrafico(idUsuario, dados) {
 
-      fetch(`/medidas/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-          if (response.ok) {
-              response.json().then(function (novoRegistro) {
 
-                  console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                  console.log(`Dados atuais do gráfico: ${dados}`);
 
-                  // tirando e colocando valores no gráfico
-                  dados.labels.shift(); // apagar o primeiro
-                  dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-                  
-                  dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                  dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-                  
-                  dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                  dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+//   function atualizarGrafico(idUsuario, dados) {
+//     fetch(`/medidas/tempo-real/${idUsuario}`, { cache: "no-store" })
+//       .then(function (response) {
+//         if (response.ok) {
+//           response.json().then(function (novoRegistro) {
+//             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+//             console.log("Dados atuais do gráfico: ", dados);
+//             return false
+//             // tirando e colocando valores no gráfico
+//             dados.labels.shift(); // apagar o primeiro
+//             dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-                  window.grafico_linha.update();
+//             dados.datasets[0].data.shift(); // apagar o primeiro de umidade
+//             dados.datasets[0].data.push(novoRegistro[0].peso); // incluir uma nova medida de umidade
 
-                  // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                  proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
-              });
-          } else {
-              console.error('Nenhum dado encontrado ou erro na API');
-              // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-              proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
-          }
-      })
-          .catch(function (error) {
-              console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-          });
+//             // dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+//             // dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-  }
+//             window.grafico_linha.update();
+
+//             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+//             proximaAtualizacao = setTimeout(
+//               () => atualizarGrafico(idUsuario, dados),
+//               2000
+//             );
+//           });
+//         } else {
+//           console.error("Nenhum dado encontrado ou erro na API");
+//           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+//           proximaAtualizacao = setTimeout(
+//             () => atualizarGrafico(idUsuario, dados),
+//             2000
+//           );
+//         }
+//       })
+//       .catch(function (error) {
+//         console.error(
+//           `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+//         );
+//       });
+//   }
 </script>

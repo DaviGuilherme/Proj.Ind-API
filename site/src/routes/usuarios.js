@@ -16,6 +16,11 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+// Recebendo os dados do html e direcionando para a função registrar de usuarioController.js
+router.post("/registrar", function (req, res) {
+    usuarioController.registrar(req, res);
+})
+
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
 });

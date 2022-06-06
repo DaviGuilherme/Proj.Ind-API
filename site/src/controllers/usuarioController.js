@@ -91,9 +91,42 @@ function cadastrar(req, res) {
     }
 }
 
+function registrar(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var peso = req.body.pesoServer;
+    var ux = req.body.uxServer;
+
+    // Faça as validações dos valores
+    if (peso == undefined) {
+        res.status(400).send("Seu peso está undefined!");
+    } else if (ux == undefined) {
+        res.status(400).send("Seu id de usuario está undefined!");
+    }
+     else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.registrar(peso,ux)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao registrar peso! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    registrar
 }
