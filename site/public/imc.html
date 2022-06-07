@@ -26,7 +26,7 @@
                 <button onclick="calcularM()">Calcular IMC Masculino</button> <br> <br>
                 <button onclick="calcularF()">Calcular IMC Feminino</button> <br> <br> <br>
                 <a class="aaa" href="index.html">Voltar</a>
-                
+
             </div>
             <div id="div_graf">
                 <canvas id="myChart"></canvas>
@@ -40,6 +40,7 @@
 <script>
     var historicoP = [];
     var historicoIMC = [];
+
     function calcularM() {
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
@@ -58,10 +59,11 @@
             alert(`Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`)
         }
 
-    
+
 
         historicoIMC.push(calculo);
     }
+
     function calcularF() {
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
@@ -69,21 +71,31 @@
         var vali = true;
 
         if (peso == '') {
-            alert('Preencha o peso corretamente')
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Você não preencheu o campo do Peso',
+            })
+
             vali = false
         }
         if (altura == '') {
-            alert('Preencha a altura corretamente')
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Você não preencheu o campo do Altura',
+            })
             vali = false
         }
         if (vali) {
+            'info'
             alert(`Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`)
             historicoIMC.push(altura);
         }
 
-        
+
 
     }
-
-    
 </script>
