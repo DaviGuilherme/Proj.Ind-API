@@ -123,6 +123,17 @@ a:hover {
     font-weight: bold;
 }
 
+#sair {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#sair:hover {
+    transition: 0.5s;
+    color: #fc4d3e;
+    font-weight: bold;
+}
+
 /* Lista */
 
 .lista {

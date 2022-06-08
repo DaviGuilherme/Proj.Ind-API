@@ -169,6 +169,38 @@ footer {
     font-weight: bold;
 }
 
+/* #git {
+    color: #fc4d3e;
+    display: block;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+#git:hover {
+    color: #eee;
+    transition: 0.5s;
+    background-color: 0;
+    padding: auto;
+    border: 0;
+    border-radius: 0;
+    width: auto;
+} */
+
+/* a {
+    display: flex;
+    justify-content: space-between;
+    color: #eee;
+    font-size: 15px;
+    text-decoration: none;
+}
+a:hover {
+    transition: 0.5s;
+    background-color: #412b63;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+} */
+
 /* Daqui */ 
 
 .alerta_erro{
