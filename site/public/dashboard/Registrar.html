@@ -65,8 +65,21 @@
         text: "Parece que voce não digitou o peso",
       });
       return false;
-    } else {
-      alert("ok");
+    } 
+    if (pesoVar < 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Digite um valor coerente com a realidade",
+      });
+      return false;
+    } 
+    else {
+      Swal.fire(
+      'Valor aceito!',
+      'Exibindo gráfico...',
+      'success'
+        );
     }
 
     // Enviando o valor da nova input
