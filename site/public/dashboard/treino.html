@@ -1,66 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Treino</title>
-    <link rel="stylesheet" href="../css/estilo-treino.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilo-treino.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="shortcut icon" href="../assets/icon/icone.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="../assets/icon/icone.png"
+      type="image/x-icon"
+    />
     <script src="./js/funcoes.js"></script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <!--Menu de seleção-->
     <main class="tudo">
-        <section class="menu">
-            <div class="box-treino" onclick="treino()">
-                <p>Tá pegando fogo bicho </p>
-            </div>
-            <div class="box-treino2" onclick="treino2()">
-                <p>Agachamento nos 30</p>
-            </div>
-            <div class="box-treino3" onclick="treino3()">
-                <p>Amor proibido</p>
-            </div>
-            <div class="box-treino4" onclick="treino4()">
-                <p>Baby Fausto</p>
-            </div>
-            <div class="imc">
-                <a href="./Registrar.html">Registrar peso</a> <br> <br>
-                <a href="./Rotina.html">Rotina</a> <br> <br>
-                <a href="../index.html" id="sair">Sair</a>
-            </div>
-        </section>
-        <!--Lista com treinos-->
-        <section class="area">
-            <div class="lista">
-                <div class="display" id="display">
-                    
-                </div>
-            </div>
-        </section>
+      <section class="menu">
+          <h1>Treinos</h1>
+        <div class="box-treino" onclick="treino()">
+          <p>Tá pegando fogo bicho</p>
+        </div>
+        <div class="box-treino2" onclick="treino2()">
+          <p>Agachamento nos 30</p>
+        </div>
+        <div class="box-treino3" onclick="treino3()">
+          <p>Amor proibido</p>
+        </div>
+        <div class="box-treino4" onclick="treino4()">
+          <p>Baby Fausto</p>
+        </div>
+        <div class="imc">
+          <a href="./Registrar.html">Registrar peso</a> <br />
+          <br />
+          <a href="./Rotina.html">Rotina</a> <br />
+          <br />
+          <a href="../index.html" id="sair">Sair</a>
+        </div>
+      </section>
+      <!--Lista com treinos-->
+      <section class="area">
+        <div class="lista">
+          <div class="display" id="display" style="font-weight: bold;"></div>
+        </div >
+      </section>
     </main>
-</body>
+  </body>
 </html>
 
 <script>
-    function treino() {
-        Swal.fire({
-            title: 'Tá pegando fogo bicho ',
-            text: 'Um treino de abdominal para queimar gordura',
-            imageUrl: '../assets/imgs/churrasqueira-600x400.jpg',
-            imageWidth: 400,
-            imageHeight: 200,
-            imageAlt: 'Custom image',
-        })
+  Swal.fire({
+    icon: "info",
+    title: "Bem vindo <br>ao<br> Faustão Training Maker",
+    text: "Clicando em um treino, é exibido uma série de exercícios de musculação",
+    
+  });
 
-        display.innerHTML = `
+  function treino() {
+    Swal.fire({
+      title:'<b style="font-weight: bold> Tá pegando fogo bicho </b>',
+      text: "Um treino de abdominal para queimar gordura",
+      imageUrl: "../assets/imgs/churrasqueira-600x400.jpg",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
+
+    display.innerHTML = `
             Treino: Tá pegando fogo bicho
             <br><br>
             Exercícios: 
@@ -70,19 +83,18 @@
             Exercício 3: Abdomen Infra (4x10)<br>
             Exercício 4: Esteira (30 min)<br>
         `;
-        
-    }
+  }
 
-    function treino2() {
-        Swal.fire({
-            title: 'Agachamento nos 30',
-            text: 'Um treino rapido e eficiente',
-            imageUrl: '../assets/imgs/gatoLouco.png',
-            imageWidth: 400,
-            imageHeight: 200,
-            imageAlt: 'Custom image',
-        })
-        display.innerHTML = `
+  function treino2() {
+    Swal.fire({
+      title: '<b style="font-weight: bold>Agachamento nos 30</b>',
+      text: "Um treino rapido e eficiente",
+      imageUrl: "../assets/imgs/gatoLouco.png",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
+    display.innerHTML = `
             Treino: Agachamento nos 30
             <br><br>
             Exercícios: 
@@ -93,19 +105,18 @@
             Exercício 4: Agachamento com salto (4x10)<br>
             Exercício 5: Agachamento afundo (4x10) <br>
         `;
-        
-    }
+  }
 
-    function treino3() {
-        Swal.fire({
-            title: 'Amor proibido',
-            text: 'Um treino para conquistar sua amada(o)',
-            imageUrl: '../assets/imgs/selena.jpg',
-            imageWidth: 400,
-            imageHeight: 200,
-            imageAlt: 'Custom image',
-        })
-        display.innerHTML = `
+  function treino3() {
+    Swal.fire({
+      title: '<b style="font-weight: bold>Amor proibido</b>',
+      text: "Um treino para conquistar sua amada(o)",
+      imageUrl: "../assets/imgs/selena.jpg",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
+    display.innerHTML = `
             Treino: Amor proibido
             <br><br>
             Exercícios: 
@@ -120,20 +131,19 @@
             Exercício 8: Esteira (30 min) <br>
             Exercício 9: Escada Matrix (10 min) <br>
         `;
-        
-    }
+  }
 
-    function treino4() {
-        Swal.fire({
-            title: 'Baby Fausto',
-            text: 'Um treino mais leve e descontraido',
-            imageUrl: '../assets/imgs/faustinho.jpg',
-            imageWidth: 400,
-            imageHeight: 200,
-            imageAlt: 'Custom image',
-        })
+  function treino4() {
+    Swal.fire({
+      title: '<b style="font-weight: bold>Baby Fausto</b>',
+      text: "Um treino mais leve e descontraido",
+      imageUrl: "../assets/imgs/faustinho.jpg",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
 
-        display.innerHTML = `
+    display.innerHTML = `
         Treino: Baby Fausto
             <br><br>
             Exercícios: 
@@ -148,6 +158,5 @@
             Exercício 8: Tricps Puley (4x10) <br>
             Exercício 9: Triceps Corda (4x10) <br>
         `;
-
-    }
+  }
 </script>

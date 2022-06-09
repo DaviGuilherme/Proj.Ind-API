@@ -6,12 +6,17 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h1 {
-    color: #eee;
+h1, b {
+    color: #fc4d3e;
     font-weight: bold;
 }
 
+p {
+    font-size: large;
+}
+
 .sobre {
+    margin-top: 70px;
     color: #eee;
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;

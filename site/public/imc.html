@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMC</title>
-    <link rel="stylesheet" href="./css/estilo-maker.css">
+    <link rel="stylesheet" href="./css/estilo-imc.css">
     <link rel="shortcut icon" href="../assets/icon/icone.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/funcoes.js"></script>
 
 </head>
@@ -25,11 +26,9 @@
                 <input type="text" id="ipt_altura" placeholder="1.80 m"> <br> <br>
                 <button onclick="calcularM()">Calcular IMC Masculino</button> <br> <br>
                 <button onclick="calcularF()">Calcular IMC Feminino</button> <br> <br> <br>
-                <a class="aaa" href="index.html">Voltar</a>
+                <a id="aaa" href="index.html">Voltar</a> <br><br><br><br>
 
-            </div>
-            <div id="div_graf">
-                <canvas id="myChart"></canvas>
+                <img id="imagem" src="https://i.pinimg.com/originals/fa/92/78/fa92787ec43401155518d13df16976c0.png">
             </div>
         </section>
     </main>
@@ -38,37 +37,54 @@
 
 </html>
 <script>
-    var historicoP = [];
-    var historicoIMC = [];
 
     function calcularM() {
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
         var calculo = peso / (altura * altura);
-        var vali = true;
+        var validacao = true;
 
         if (peso == '') {
-            alert('Preencha o peso corretamente')
-            vali = false
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Você não preencheu o campo do Peso',
+            })
+            validacao = false
         }
         if (altura == '') {
-            alert('Preencha a altura corretamente')
-            vali = false
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Você não preencheu o campo do Altura',
+            })
+            validacao = false
         }
-        if (vali) {
-            alert(`Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`)
+        if (altura <= 0 || peso <= 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Você informe valores validos',
+            })
+            validacao = false
+        }
+        if (validacao) {
+            Swal.fire({
+                icon: 'info',
+                title: 'Resutado',
+                text: `Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`,
+                footer: '<a  class="info" href="https://www.saudenaosepesa.com.br/diagnostico.html?utm_source=g-search&utm_medium=cpc&utm_content=texto&utm_term=normal&utm_campaign=ogilvybr_novo-nordisk_always-on-performance_g-search_cliques_202205_texto_cpc_calcule-imc&gclid=CjwKCAjwkYGVBhArEiwA4sZLuDbbQxT3xszCFnlpAEEsfW7ZqwughpK1RQtSvIIA_kd5YcBVMnn07RoCYLgQAvD_BwE">Saiba mais</a>'
+            })
         }
 
 
-
-        historicoIMC.push(calculo);
     }
 
     function calcularF() {
         var peso = Number(ipt_peso.value);
         var altura = Number(ipt_altura.value);
         var calculo = (peso / (altura * altura)) * 0.9;
-        var vali = true;
+        var validacao = true;
 
         if (peso == '') {
 
@@ -78,8 +94,9 @@
                 text: 'Você não preencheu o campo do Peso',
             })
 
-            vali = false
+            validacao = false
         }
+
         if (altura == '') {
 
             Swal.fire({
@@ -87,12 +104,26 @@
                 title: 'Oops...',
                 text: 'Você não preencheu o campo do Altura',
             })
-            vali = false
+            validacao = false
         }
-        if (vali) {
-            'info'
-            alert(`Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`)
-            historicoIMC.push(altura);
+        if (altura <= 0 || peso <= 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Você informe valores validos',
+            })
+            validacao = false
+        }
+        if (validacao) {
+
+            Swal.fire({
+                icon: 'info',
+                title: 'Resutado',
+                text: `Seu Indice de Massa Corporea é ${calculo.toFixed(2)}`,
+                footer: '<a  class="info" href="https://www.saudenaosepesa.com.br/diagnostico.html?utm_source=g-search&utm_medium=cpc&utm_content=texto&utm_term=normal&utm_campaign=ogilvybr_novo-nordisk_always-on-performance_g-search_cliques_202205_texto_cpc_calcule-imc&gclid=CjwKCAjwkYGVBhArEiwA4sZLuDbbQxT3xszCFnlpAEEsfW7ZqwughpK1RQtSvIIA_kd5YcBVMnn07RoCYLgQAvD_BwE">Saiba mais</a>'
+            })
+
+            
         }
 
 

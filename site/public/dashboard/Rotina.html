@@ -10,6 +10,7 @@
       href="../assets/icon/icone.png"
       type="image/x-icon"
     />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../css/estilo-rotina.css" />
   </head>
   <body>
@@ -18,10 +19,10 @@
         <div class="display">
           Quantos <b class="dias">dias</b> ao todo voce quer praticar musculação
           ? <br />
-          <input type="text" id="ipt_intervalo" placeholder="Ex: 30" /> <br />
+          <input type="number" id="ipt_intervalo" placeholder="Ex: 30" /> <br />
           <br />
           De quantos em quantos dias voce quer praticar? <br />
-          <input type="text" id="ipt_dias" placeholder="Ex: 2" /> <br /><br />
+          <input type="number" id="ipt_dias" placeholder="Ex: 2" /> <br /><br />
           <button onclick="exibir()">Exibir intervalo de treino</button><br />
           <a href="./treino.html">Voltar</a> <br />
           <br />
@@ -40,7 +41,11 @@
 
     if (dias <= 0 || intervalo <= 0) {
       validacao = false;
-      alert("Informe um valor coerente");
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: "Informe um valor coerente",
+      });
     }
     if (validacao) {
       div_msg.innerHTML = ``;

@@ -8,6 +8,8 @@ body    {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/*Display da calculadora */
+
 .rotina {
     margin-top: 100px;
     color: #eee;
@@ -61,6 +63,8 @@ a {
     cursor: pointer;
     text-decoration: none;
 }
+
+/* Botão de voltar */
 
 a:hover {
     background-color: #412b63;

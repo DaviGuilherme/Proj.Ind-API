@@ -258,13 +258,13 @@ a:hover {
   } */
   
   .loading-div {
-    width: 50px;
+    width: 40px;
     margin: auto;
     display: none;
   }
   
   .loading-div img {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
   }
 
